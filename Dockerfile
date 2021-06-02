@@ -1,7 +1,5 @@
 FROM registry.access.redhat.com/ubi8/go-toolset
 
-ARG GRAFANA_VERSION=v7.5.7
-
 USER root
 
 # Install Nodejs environmnet with yarn
@@ -11,6 +9,9 @@ RUN curl -sL https://rpm.nodesource.com/setup_14.x | bash - \
 
 USER default
 
-RUN git clone -b $GRAFANA_VERSION https://github.com/grafana/grafana.git --depth=1 \
-   && cd grafana \
+ARG GRAFANA_VERSION=7.5.7
+
+RUN curl -L https://github.com/grafana/grafana/archive/refs/tags/v${GRAFANA_VERSION}.tar.gz | tar -xz \
+   && ls -alh \
+   && cd grafana-$GRAFANA_VERSION \
    && make
