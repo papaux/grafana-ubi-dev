@@ -14,4 +14,5 @@ ARG GRAFANA_VERSION=7.5.7
 RUN curl -L https://github.com/grafana/grafana/archive/refs/tags/v${GRAFANA_VERSION}.tar.gz | tar -xz \
    && ls -alh \
    && cd grafana-$GRAFANA_VERSION \
-   && make
+   && make \
+   && make scripts/go/bin/bra
